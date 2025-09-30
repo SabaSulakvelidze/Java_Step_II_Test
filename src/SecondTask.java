@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class SecondTask {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.close();
+
+        List<String> result = new ArrayList<>();
+        generate(result, "", 0, 0, n);
+
+        result.forEach(System.out::println);
+    }
+
+    static void generate(List<String> result, String current, int open, int close, int n) {
+        if (current.length() == 2 * n) {
+            result.add(current);
+            return;
+        }
+
+        if (open < n) generate(result, current + "{", open + 1, close, n);
+
+        if (close < open) generate(result, current + "}", open, close + 1, n);
+
+    }
+}
